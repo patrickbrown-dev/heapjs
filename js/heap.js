@@ -29,7 +29,7 @@ Heap.prototype.extractMax = function()
     this._size--;
     this.buildMaxHeap();
 
-    console.log(this._tree);
+    console.log(this);
 
     return to_return;
 };
@@ -42,7 +42,7 @@ Heap.prototype.insert = function(value)
     if(this._tree[1] == null){
         this._tree[1] = value;
         this._size++;
-    }else{
+    } else {
         this._size++;
         this._tree[this._size] = value;
         this.buildMaxHeap();
@@ -74,17 +74,16 @@ Heap.prototype.maxHeapify = function(key)
     var node = this._tree[key];
     var left_child = this.getLeft(key);
     var right_child = this.getRight(key);
-    
-    console.log("key: " + key);
-    console.log("node: " + node);
-    console.log("left: " + left_child);
-    console.log("right: " + right_child);
 
+    // Base case, if current node is greater than both of its
+    // children.
     if(node < left_child || node < right_child){
         if(left_child > right_child || right_child == null){
+            // swap left child with node
             this._tree[key] = left_child;
             this.setLeft(key, node);
-        } else {
+        } else if(right_child > node){
+            // swap right child with node
             this._tree[key] = right_child;
             this.setRight(key, node);
         }
@@ -129,7 +128,6 @@ Heap.prototype.setRight = function(key, value)
 
 var heap = new Heap;
 heap.insert(89);
-//console.log(heap.getMax());
 heap.insert(10);
 heap.insert(41);
 heap.insert(12);
@@ -137,5 +135,12 @@ heap.insert(52);
 heap.insert(12);
 heap.insert(13);
 heap.insert(18);
-//console.log(heap.getMax());
-//console.log(heap.extractMax());
+console.log(heap.extractMax());
+/*console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+*/
