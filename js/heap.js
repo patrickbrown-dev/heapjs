@@ -59,27 +59,6 @@ Heap.prototype.buildMaxHeap = function()
 };
 
 /**
- * Bubbles up a high value to proper level in tree.
- * O(log n) time.
- *
- * @param key to bubble up at.
- */
-Heap.prototype.bubbleUp = function(key)
-{
-    var node = this._tree[key];
-    var parent_key = this.getParent(key);
-    var parent_value = this._tree[parent_key];
-
-    this.maxHeapify(key);
-    console.log(parent_key);
-
-    if(parent_value < node && parent_value != null){
-        console.log("up");
-        this.bubbleUp(parent_key);
-    }
-};
-
-/**
  * Bubbles down a low value to proper level in the tree.
  * O(log n) time.
  * 
