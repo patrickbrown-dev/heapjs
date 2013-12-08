@@ -38,6 +38,7 @@ Heap.prototype.extractMax = function()
 Heap.prototype.insert = function(value)
 {
     if(this._tree[1] == null){
+        // Base case: The tree is empty and we just add to root.
         this._tree[1] = value;
         this._size++;
     } else {
@@ -83,10 +84,9 @@ Heap.prototype.bubbleDown = function(key=1)
 };
 
 /**
- * Assumes that the trees rooted at left(i) and right(i) are
- * max_heaps.
+ * Looks at a given node's childern, and then swaps itself with a
+ * child if the child is bigger.
  *
- * @param size of heap.
  * @param key of node to heapify.
  */
 Heap.prototype.maxHeapify = function(key)
@@ -95,7 +95,7 @@ Heap.prototype.maxHeapify = function(key)
     var left_child = this._tree[this.getLeft(key)];
     var right_child = this._tree[this.getRight(key)];
 
-    // Base case, if current node is greater than both of its
+    // Base case: If current node is greater than both of its
     // children.
     if(node < left_child || node < right_child){
         if(left_child > right_child || right_child == null){
