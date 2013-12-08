@@ -168,22 +168,22 @@ Heap.prototype.setRight = function(key, value)
 
 
 var heap = new Heap;
+
 console.log(heap);
-heap.insert(89);
-heap.insert(10);
-heap.insert(41);
-heap.insert(12);
-heap.insert(52);
-heap.insert(12);
-heap.insert(13);
-heap.insert(18);
-heap.insert(300);
-console.log(heap.extractMax());
-console.log(heap.extractMax());
-console.log(heap.extractMax());
-console.log(heap.extractMax());
-console.log(heap.extractMax());
-console.log(heap.extractMax());
-console.log(heap.extractMax());
-console.log(heap.extractMax());
+
+for(var i = 0; i < 100; i++){
+    heap.insert(Math.floor(Math.random()*100));
+}
+
+var last = 100;
+var temp;
+
+for(var i = 0; i < 100; i++){
+    temp = heap.extractMax()
+    if(temp > last){
+        console.log("ERROR");
+    }
+    last = temp;
+    console.log(last);
+}
 
