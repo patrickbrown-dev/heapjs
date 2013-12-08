@@ -27,9 +27,7 @@ Heap.prototype.extractMax = function()
     this._tree[1] = this._tree[this._size];
     this._tree[this._size] = null;
     this._size--;
-    this.buildMaxHeap();
-
-    console.log(this);
+    this.bubbleDown(1);
 
     return to_return;
 };
@@ -47,8 +45,6 @@ Heap.prototype.insert = function(value)
         this._tree[this._size] = value;
         this.buildMaxHeap();
     }
-
-    console.log(this);
 };
 
 /**
@@ -63,6 +59,51 @@ Heap.prototype.buildMaxHeap = function()
 };
 
 /**
+ * Bubbles up a high value to proper level in tree.
+ * O(log n) time.
+ *
+ * @param key to bubble up at.
+ */
+Heap.prototype.bubbleUp = function(key)
+{
+    var node = this._tree[key];
+    var parent_key = this.getParent(key);
+    var parent_value = this._tree[parent_key];
+
+    this.maxHeapify(key);
+    console.log(parent_key);
+
+    if(parent_value < node && parent_value != null){
+        console.log("up");
+        this.bubbleUp(parent_key);
+    }
+};
+
+/**
+ * Bubbles down a low value to proper level in the tree.
+ * O(log n) time.
+ * 
+ * @param key to start bubbling down at (default to root)
+ */
+Heap.prototype.bubbleDown = function(key=1)
+{
+    var node = this._tree[key];
+    var left_key = this.getLeft(key);
+    var left_value = this._tree[left_key];
+    var right_key = this.getRight(key);
+    var right_value = this._tree[right_key];
+
+    this.maxHeapify(key);
+
+    if(left_value > node && left_value != null){
+        this.bubbleDown(left_key);
+    }
+    if(right_value > node && right_value != null){
+        this.bubbleDown(right_key);
+    }
+};
+
+/**
  * Assumes that the trees rooted at left(i) and right(i) are
  * max_heaps.
  *
@@ -72,8 +113,8 @@ Heap.prototype.buildMaxHeap = function()
 Heap.prototype.maxHeapify = function(key)
 {
     var node = this._tree[key];
-    var left_child = this.getLeft(key);
-    var right_child = this.getRight(key);
+    var left_child = this._tree[this.getLeft(key)];
+    var right_child = this._tree[this.getRight(key)];
 
     // Base case, if current node is greater than both of its
     // children.
@@ -97,17 +138,17 @@ Heap.prototype.maxHeapify = function(key)
 
 Heap.prototype.getParent = function(key)
 {
-    return this._tree[key/2];
+    return Math.floor(key / 2);
 };
 
 Heap.prototype.setParent = function(key, value)
 {
-    this._tree[key/2] = value;
+    this._tree[Math.floor(key / 2)] = value;
 };
 
 Heap.prototype.getLeft = function(key)
 {
-    return this._tree[2 * key];
+    return 2 * key;
 };
 
 Heap.prototype.setLeft = function(key, value)
@@ -117,16 +158,17 @@ Heap.prototype.setLeft = function(key, value)
 
 Heap.prototype.getRight = function(key)
 {   
-    return this._tree[2*key + 1];
+    return 2 * key + 1;
 };
 
 Heap.prototype.setRight = function(key, value)
 {
-    this._tree[2*key + 1] = value;
+    this._tree[2 * key + 1] = value;
 };
 
 
 var heap = new Heap;
+console.log(heap);
 heap.insert(89);
 heap.insert(10);
 heap.insert(41);
@@ -135,12 +177,13 @@ heap.insert(52);
 heap.insert(12);
 heap.insert(13);
 heap.insert(18);
-console.log(heap.extractMax());
-/*console.log(heap.extractMax());
-console.log(heap.extractMax());
+heap.insert(300);
 console.log(heap.extractMax());
 console.log(heap.extractMax());
 console.log(heap.extractMax());
 console.log(heap.extractMax());
 console.log(heap.extractMax());
-*/
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+console.log(heap.extractMax());
+
