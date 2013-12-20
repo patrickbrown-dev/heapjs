@@ -37,7 +37,7 @@ Heap.prototype.extractMax = function()
  */
 Heap.prototype.insert = function(value)
 {
-    if(this._tree[1] == null){
+    if(this._tree[1] === null){
         // Base case: The tree is empty and we just add to root.
         this._tree[1] = value;
         this._size++;
@@ -65,7 +65,7 @@ Heap.prototype.buildMaxHeap = function()
  * 
  * @param key to start bubbling down at (default to root)
  */
-Heap.prototype.bubbleDown = function(key=1)
+Heap.prototype.bubbleDown = function(key)
 {
     var node = this._tree[key];
     var left_key = this.getLeft(key);
@@ -75,10 +75,10 @@ Heap.prototype.bubbleDown = function(key=1)
 
     this.maxHeapify(key);
 
-    if(left_value > node && left_value != null){
+    if(left_value > node && left_value !== null){
         this.bubbleDown(left_key);
     }
-    if(right_value > node && right_value != null){
+    if(right_value > node && right_value !== null){
         this.bubbleDown(right_key);
     }
 };
@@ -145,7 +145,9 @@ Heap.prototype.setRight = function(key, value)
     this._tree[2 * key + 1] = value;
 };
 
-
+/**
+ * Tests
+ */
 var heap = new Heap;
 
 console.log(heap);
@@ -158,7 +160,7 @@ var last = 100;
 var temp;
 
 for(var i = 0; i < 100; i++){
-    temp = heap.extractMax()
+    temp = heap.extractMax();
     if(temp > last){
         console.log("ERROR");
     }
