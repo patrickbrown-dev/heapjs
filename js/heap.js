@@ -22,14 +22,19 @@ Heap.prototype.getMax = function()
  */
 Heap.prototype.extractMax = function()
 {
-    var to_return = this.getMax();
+    if(this._size > 0){
 
-    this._tree[1] = this._tree[this._size];
-    this._tree[this._size] = null;
-    this._size--;
-    this.bubbleDown(1);
+        var to_return = this.getMax();
 
-    return to_return;
+        this._tree[1] = this._tree[this._size];
+        this._tree[this._size] = null;
+        this._size--;
+        this.bubbleDown(1);
+
+        return to_return;
+    }
+
+    console.log("heap is empty");
 };
 
 /**
@@ -148,23 +153,52 @@ Heap.prototype.setRight = function(key, value)
 /**
  * Tests
  */
-var heap = new Heap;
 
-console.log(heap);
+tests = function()
+{
+    var heap = new Heap;
 
-for(var i = 0; i < 100; i++){
-    heap.insert(Math.floor(Math.random()*100));
-}
+    console.log(heap);
 
-var last = 100;
-var temp;
-
-for(var i = 0; i < 100; i++){
-    temp = heap.extractMax();
-    if(temp > last){
-        console.log("ERROR");
+    for(var i = 0; i < 100; i++){
+        heap.insert(Math.floor(Math.random()*100));
     }
-    last = temp;
-    console.log(last);
+
+    var last = 100;
+    var temp;
+
+    for(var i = 0; i < 100; i++){
+        temp = heap.extractMax();
+        if(temp > last){
+            console.log("ERROR");
+        }
+        last = temp;
+        console.log(last);
+    }
 }
 
+/**
+ * GUI
+ */
+
+var h = new Heap;
+console.log(h);
+
+$( "#heapshell" ).text("Help docs.");
+
+$( "#push" ).click(function () {
+    var to_add = Number($( "#pushValue" ).val());
+    $( "#pushValue" ).val("");
+    
+    h.insert(to_add);
+    $( "#heapshell" ).text(".push() added " + to_add + " onto heap.");
+});
+
+$( "#pop" ).click(function () {
+    var to_remove = h.extractMax();
+    $( "#heapshell" ).text(".pop() returned " + to_remove + ".");
+});
+
+$( "#peek" ).click(function () {
+    $( "#heapshell" ).text(".peek() returned " + h.getMax() + ".");
+});
