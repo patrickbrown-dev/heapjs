@@ -22,8 +22,8 @@ Heap.prototype.getMax = function()
  */
 Heap.prototype.extractMax = function()
 {
+    // Catch when heap is empty so we don't get a negative _size.
     if(this._size > 0){
-
         var to_return = this.getMax();
 
         this._tree[1] = this._tree[this._size];
@@ -150,55 +150,4 @@ Heap.prototype.setRight = function(key, value)
     this._tree[2 * key + 1] = value;
 };
 
-/**
- * Tests
- */
 
-tests = function()
-{
-    var heap = new Heap;
-
-    console.log(heap);
-
-    for(var i = 0; i < 100; i++){
-        heap.insert(Math.floor(Math.random()*100));
-    }
-
-    var last = 100;
-    var temp;
-
-    for(var i = 0; i < 100; i++){
-        temp = heap.extractMax();
-        if(temp > last){
-            console.log("ERROR");
-        }
-        last = temp;
-        console.log(last);
-    }
-}
-
-/**
- * GUI
- */
-
-var h = new Heap;
-console.log(h);
-
-$( "#heapshell" ).text("Help docs.");
-
-$( "#push" ).click(function () {
-    var to_add = Number($( "#pushValue" ).val());
-    $( "#pushValue" ).val("");
-    
-    h.insert(to_add);
-    $( "#heapshell" ).text(".push() added " + to_add + " onto heap.");
-});
-
-$( "#pop" ).click(function () {
-    var to_remove = h.extractMax();
-    $( "#heapshell" ).text(".pop() returned " + to_remove + ".");
-});
-
-$( "#peek" ).click(function () {
-    $( "#heapshell" ).text(".peek() returned " + h.getMax() + ".");
-});

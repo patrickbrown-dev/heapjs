@@ -1,12 +1,41 @@
-body {
-    margin-top: 75px;
-}
-
-.container {
-}
-
 #heapshell {
     margin-top:5px;
-    color: #fff;
-    background-color: #000;
 }
+
+footer {
+    padding-bottom: 50px;
+}
+
+.input-group {
+    margin-bottom: 5px;
+}
+
+.btn-code {
+    font-family: Menlo, Consolas, Monaco, "Lucida Console", monospace;
+}
+
+/**
+ * D3 Styles.
+ */
+
+.node {
+    cursor: pointer;
+}
+
+.node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+
+.node text {
+    font: 10px sans-serif;
+}
+
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+}
+
+
