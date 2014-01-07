@@ -32,7 +32,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="./heapjs.html"><i class="fa fa-rocket"></i> Demo</a></li>
-                    <li><a href="#api"><i class="fa fa-book"></i> API</a></li>
+                    <li><a href="#docs"><i class="fa fa-book"></i> Documentation</a></li>
                     <li><a href="https://raw.github.com/ptrckbrwn/heapjs/master/js/heap.js"><i class="fa fa-download"></i> Download (0.0.2)</a></li>
                     <li><a href="http://github.com/ptrckbrwn/heapjs"><i class="fa fa-github"></i> GitHub</a></li>
                 </ul>
@@ -51,44 +51,84 @@
             </div>
             <div class="jumbotron">
                 <h1>heap.js</h1>
+                <h4>A super simple priority queue for javascript.</h4>
                 <a href="./heapjs.html" class="btn btn-lg btn-success"><i class="fa fa-rocket"></i> Launch Demo</a>
-                <a href="#api" class="btn btn-lg btn-info"><i class="fa fa-book"></i> API</a>
+                <a href="#docs" class="btn btn-lg btn-info"><i class="fa fa-book"></i> Documentation</a>
                 <a href="https://raw.github.com/ptrckbrwn/heapjs/master/js/heap.js" class="btn btn-lg btn-primary"><i class="fa fa-download"></i> Download (0.0.2)</a>
                 <a href="http://github.com/ptrckbrwn/heapjs" class="btn btn-lg btn-default"><i class="fa fa-github"></i> GitHub</a>
             </div>
 
-            <h2 id="api"><i class="fa fa-book"></i> API</h2>
-            
-            <h3>Properties</h3>
-            <h4><i class="fa fa-plus"></i> ._size</h4>
-            <h4 class="text-muted"><i class="fa fa-minus"></i> ._tree</h4>
-            
-            <h3>Methods</h3>
-            <h4><i class="fa fa-plus"></i> .insert( [value] )</h4>
-            <p>
-                Insert [value] onto the tree.
-            </p>
+            <h2 id="docs"><i class="fa fa-book"></i> Documentation</h2>
 
-            <h4><i class="fa fa-plus"></i> .extractMax( )</h4>
-            <p>
-                Return the root node, or highest valued node. Remove it from tree.
-            </p>
-            
-            <h4><i class="fa fa-plus"></i> .getMax( )</h4> 
-            <p>
-                Return the root node, or the highest valued node.
-            </p>
+            <div class="alert alert-warning">
+                <p>Because heap.js is under active development these docs will be inaccurate most of the time. Once we stabilize on a 1.0.0, we'll maintain the docs more vigilantly.</p>
+            </div>
 
-            <h4 class="text-muted"><i class="fa fa-minus"></i> .buildMaxHeap( )</h4>
-            <h4 class="text-muted"><i class="fa fa-minus"></i> .bubbleDown( [key] )</h4>
-            <h4 class="text-muted"><i class="fa fa-minus"></i> .maxHeapify( [key] )</h4>
-            <h4 class="text-muted"><i class="fa fa-minus"></i> .getParent( [key] )</h4>            
-            <h4 class="text-muted"><i class="fa fa-minus"></i> .setParent( [key], [value] )</h4>
-            <h4 class="text-muted"><i class="fa fa-minus"></i> .getLeft( [key] )</h4>
-            <h4 class="text-muted"><i class="fa fa-minus"></i> .setLeft( [key], [value] )</h4>
-            <h4 class="text-muted"><i class="fa fa-minus"></i> .getRight( [key] )</h4>
-            <h4 class="text-muted"><i class="fa fa-minus"></i> .setRight( [key], [value] )</h4>
-            
+            <div class="row">
+                <div class="col-lg-5">
+                    <h3>Installation</h3>
+                    <h4>node.js</h4>
+                    <p>Use npm to install the heap.js package.</p>
+                    <code>npm install heapjs</code>
+                    </p>
+                    <p>Require it like this:</p>
+                    <p><code>var heap = require("heap.js");</code></p>
+                    <p>Instance a new heap object.</p>
+                    <p><code>var h = new heap.maxHeap();</code></p>
+                    <p>Now you're ready to interact with your heap object!</p>
+                    <p><code>h.push(7);</code></p>
+
+                    <h4>javascript/other</h4>
+                    <p>To do.</p>
+                </div>
+                
+                <div class="col-lg-7">
+                    <h3>Constructors</h3>
+                    <table class="table table-striped">
+                        <tr>
+                            <td><code>maxHeap()</code></td>
+                            <td>A heap data-structure with the root being the largest value.</td>
+                        </tr>
+                        <tr>
+                            <td><code>minHeap()</code></td>
+                            <td>A heap data-structure with the root being the lowest value.</td>
+                        </tr>
+                    </table>
+                    <h3>Properties</h3>
+                    <table class="table table-striped">
+                        <tr>
+                            <td>integer</td>
+                            <td><code>size</code></td>
+                            <td>Total number of nodes in heap.</td>
+                        </tr>
+                        <tr>
+                            <td>array</td>
+                            <td><code>tree</code></td>
+                            <td>Array containing the nodes of the heap.</td>
+                        </tr>
+                    </table>
+
+                    <h3>Methods</h3>
+                    <table class="table table-striped">
+                        <tr>
+                            <td>void</td>
+                            <td><code>push( object )</code></td>
+                            <td>Pushes <code>object</code> onto the heap. Object must be comparable.</td>
+                        </tr>
+                        <tr>
+                            <td>object</td>
+                            <td><code>pop()</code></td>
+                            <td>Return the root node. Remove it from tree.</td>
+                        </tr>
+                        <tr>
+                            <td>object</td>
+                            <td><code>peek()</code></td>
+                            <td>Return the root node.</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+                
             <hr />
 
             <footer>

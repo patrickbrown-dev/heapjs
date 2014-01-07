@@ -2,7 +2,7 @@
  * GUI - We handle all userland interactions with jQuery here.
  */
 
-var h = new Heap;
+var h = new maxHeap();
 console.log(h);
 
 var printArray = function ()
@@ -18,15 +18,15 @@ var printArray = function ()
 
 printArray();
 
-var doInsert = function()
+var doPush = function()
 {
 	// store value and clear input field
 	var to_add = $( "#inputField" ).val();
 	$( "#inputField" ).val("");
 
 	// perform heap insert
-	h.insert(to_add);
-	$( "#heapshell" ).text(".insert() adds " + to_add + " onto heap.");
+	h.push(to_add);
+	$( "#heapshell" ).text("push() adds " + to_add + " onto heap.");
 	
 	// return focus to input field
 	$( "#inputField" ).focus();
@@ -36,24 +36,24 @@ var doInsert = function()
 
 $( "#heapshell" ).text("Help docs.");
 
-$( "#insert" ).click(function () {
-	doInsert();
+$( "#push" ).click(function () {
+	doPush();
 });
 
-$( "#extractMax" ).click(function () {
-	var to_remove = h.extractMax();
-	$( "#heapshell" ).text(".extractMax() returns " + to_remove + ".");
+$( "#pop" ).click(function () {
+	var to_remove = h.pop();
+	$( "#heapshell" ).text("pop() returns " + to_remove + ".");
 	printArray();
 });
 
-$( "#getMax" ).click(function () {
-	$( "#heapshell" ).text(".getMax() returns " + h.getMax() + ".");
+$( "#peek" ).click(function () {
+	$( "#heapshell" ).text("peek() returns " + h.peek() + ".");
 });
 
 $( "#inputField" ).keypress(function(e) {
 	// 13 == Enter
 	if(e.which == 13) {
-		doInsert();
+		doPush();
 	}
 });
 
