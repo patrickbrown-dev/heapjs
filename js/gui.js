@@ -5,7 +5,21 @@
 var h = new Heap;
 console.log(h);
 
-var doInsert = function() {
+var printArray = function ()
+{
+	$( "#heapvisualizer" ).text("._size: " + h._size);
+	$( "#heapvisualizer" ).append("\n._tree: ");
+	
+	h._tree.forEach(function(value, key) {
+		$( "#heapvisualizer" ).append("\n\tKey: " + key);
+		$( "#heapvisualizer" ).append("; Value: " + value);
+	});	
+};
+
+printArray();
+
+var doInsert = function()
+{
 	// store value and clear input field
 	var to_add = $( "#inputField" ).val();
 	$( "#inputField" ).val("");
@@ -16,6 +30,8 @@ var doInsert = function() {
 	
 	// return focus to input field
 	$( "#inputField" ).focus();
+	
+	printArray();
 };
 
 $( "#heapshell" ).text("Help docs.");
@@ -27,6 +43,7 @@ $( "#insert" ).click(function () {
 $( "#extractMax" ).click(function () {
 	var to_remove = h.extractMax();
 	$( "#heapshell" ).text(".extractMax() returns " + to_remove + ".");
+	printArray();
 });
 
 $( "#getMax" ).click(function () {
@@ -43,46 +60,110 @@ $( "#inputField" ).keypress(function(e) {
 /**
  * D3
  */
+ 
+var size = {
+	height: 500,
+	width: 900
+};
 
-var width = 960,
-	height = 2000;
+var treeData = {
+	name: "/",
+	contents: [
+		{
+			name: "label",
+			contents: [
+				{ name: "label" },
+				{ name: "label" },
+			]
+		},
+		{
+			name: "label",
+			contents: [
+				{
+					name: "label",
+					contents: [
+					]
+				},
+				{
+					name: "label",
+					contents: [
+					]
+				},
+			]
+		}
+	]
+};
+
+
+var maxLabelLength = 20;
+
+var options = {
+	nodeRadius: 5,
+	fontSize: 10
+};
 
 var tree = d3.layout.tree()
-	.size([height, width - 160]);
+	.sort(null)
+	.size([size.height, size.width - maxLabelLength*options.fontSize])
+	.children(function(d)
+	{
+		return (!d.contents || d.contents.length === 0) ? null : d.contents;
+	});
 
-var diagonal = d3.svg.diagonal()
-	.projection(function(d) { return [d.y, d.x]; });
+var nodes = tree.nodes(treeData);
+var links = tree.links(nodes);
 
-var svg = d3.select("body").append("svg")
-	.attr("width", width)
-	.attr("height", height)
-	.append("g")
-	.attr("transform", "translate(40,0)");
 
-d3.json("http://bl.ocks.org/mbostock/raw/4063550/flare.json", function(error, json) {
-  var nodes = tree.nodes(json),
-	  links = tree.links(nodes);
+ var layoutRoot = d3.select("#d3-container")
+ 	.append("svg:svg").attr("width", size.width).attr("height", size.height)
+ 	.append("svg:g")
+ 	.attr("class", "container")
+ 	.attr("transform", "translate(" + maxLabelLength + ",0)");
+ 
+ 
+ // Edges between nodes as a <path class="link" />
+ var link = d3.svg.diagonal()
+ 	.projection(function(d)
+ 	{
+ 		return [d.y, d.x];
+ 	});
+ 
+ layoutRoot.selectAll("path.link")
+ 	.data(links)
+ 	.enter()
+ 	.append("svg:path")
+ 	.attr("class", "link")
+ 	.attr("d", link);
+ 
+ var nodeGroup = layoutRoot.selectAll("g.node")
+ 	.data(nodes)
+ 	.enter()
+ 	.append("svg:g")
+ 	.attr("class", "node")
+ 	.attr("transform", function(d)
+ 	{
+ 		return "translate(" + d.y + "," + d.x + ")";
+ 	});
+ 
+ nodeGroup.append("svg:circle")
+ 	.attr("class", "node-dot")
+ 	.attr("r", options.nodeRadius);
+ 
+ nodeGroup.append("svg:text")
+ 	.attr("text-anchor", function(d)
+ 	{
+ 		return d.children ? "end" : "start";
+ 	})
+ 	.attr("dx", function(d)
+ 	{
+ 		var gap = 2 * options.nodeRadius;
+ 		return d.children ? -gap : gap;
+ 	})
+ 	.attr("dy", 3)
+ 	.text(function(d)
+ 	{
+ 		return d.name;
+ 	});
+ 	
+ console.log(tree);
 
-  var link = svg.selectAll("path.link")
-	  .data(links)
-	.enter().append("path")
-	  .attr("class", "link")
-	  .attr("d", diagonal);
-
-  var node = svg.selectAll("g.node")
-	  .data(nodes)
-	.enter().append("g")
-	  .attr("class", "node")
-	  .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
-
-  node.append("circle")
-	  .attr("r", 4.5);
-
-  node.append("text")
-	  .attr("dx", function(d) { return d.children ? -8 : 8; })
-	  .attr("dy", 3)
-	  .attr("text-anchor", function(d) { return d.children ? "end" : "start"; })
-	  .text(function(d) { return d.name; });
-});
-
-d3.select(self.frameElement).style("height", height + "px");
