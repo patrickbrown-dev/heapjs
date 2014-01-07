@@ -25,13 +25,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="./" class="navbar-brand">heap.js <i class="fa fa-code-fork"></i></a>
+                <a href="./" class="navbar-brand">heap.js</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="./heapjs.html"><i class="fa fa-rocket"></i> Demo</a></li>
+                    <li><a href="#api"><i class="fa fa-book"></i> API</a></li>
+                    <li><a href="https://raw.github.com/ptrckbrwn/heapjs/master/js/heap.js"><i class="fa fa-download"></i> Download (0.0.2)</a></li>
+                    <li><a href="http://github.com/ptrckbrwn/heapjs"><i class="fa fa-github"></i> GitHub</a></li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">pabrown.org</a></li>
+                    <li><a href="http://pabrown.org">pabrown.org</a></li>
                 </ul>
             </div>
         </nav>
@@ -39,37 +45,49 @@
         <div class="container">
             <div class="alert alert-warning">
                 <p>
-                    <strong>0.0.1</strong>
-                    -  All of the magic happens in the javascript console.
+                    <strong>0.0.2</strong>
+                    - basic max-heap functionality exists. 
                 </p>
             </div>
             <div class="jumbotron">
-                <h1>heap.js <i class="fa fa-code-fork"></i></h1>
-                <a href="./heapjs.html" class="btn btn-lg btn-success"><i class="fa fa-rocket"></i> Launch Tester</a>
+                <h1>heap.js</h1>
+                <a href="./heapjs.html" class="btn btn-lg btn-success"><i class="fa fa-rocket"></i> Launch Demo</a>
                 <a href="#api" class="btn btn-lg btn-info"><i class="fa fa-book"></i> API</a>
-                <a href="http://github.com/ptrckbrwn/heapjs" class="btn btn-lg btn-default"><i class="fa fa-github"></i> Source</a>
+                <a href="https://raw.github.com/ptrckbrwn/heapjs/master/js/heap.js" class="btn btn-lg btn-primary"><i class="fa fa-download"></i> Download (0.0.2)</a>
+                <a href="http://github.com/ptrckbrwn/heapjs" class="btn btn-lg btn-default"><i class="fa fa-github"></i> GitHub</a>
             </div>
 
-            <h2 id="api">heap.js API</h2>
+            <h2 id="api"><i class="fa fa-book"></i> API</h2>
             
             <h3>Properties</h3>
-            <h4>._size</h4>
-            <h4>._tree</h4>
+            <h4><i class="fa fa-plus"></i> ._size</h4>
+            <h4 class="text-muted"><i class="fa fa-minus"></i> ._tree</h4>
             
             <h3>Methods</h3>
-            <h4>.insert( [value] )</h4>
-            <h4>.extractMax( )</h4>
-            <h4>.getMax( )</h4>
+            <h4><i class="fa fa-plus"></i> .insert( [value] )</h4>
+            <p>
+                Insert [value] onto the tree.
+            </p>
+
+            <h4><i class="fa fa-plus"></i> .extractMax( )</h4>
+            <p>
+                Return the root node, or highest valued node. Remove it from tree.
+            </p>
             
-            <h4 class="text-muted">.buildMaxHeap( )</h4>
-            <h4 class="text-muted">.bubbleDown( [key] )</h4>
-            <h4 class="text-muted">.maxHeapify( [key] )</h4>
-            <h4 class="text-muted">.getParent( [key] )</h4>            
-            <h4 class="text-muted">.setParent( [key], [value] )</h4>
-            <h4 class="text-muted">.getLeft( [key] )</h4>
-            <h4 class="text-muted">.setLeft( [key], [value] )</h4>
-            <h4 class="text-muted">.getRight( [key] )</h4>
-            <h4 class="text-muted">.setRight( [key], [value] )</h4>
+            <h4><i class="fa fa-plus"></i> .getMax( )</h4> 
+            <p>
+                Return the root node, or the highest valued node.
+            </p>
+
+            <h4 class="text-muted"><i class="fa fa-minus"></i> .buildMaxHeap( )</h4>
+            <h4 class="text-muted"><i class="fa fa-minus"></i> .bubbleDown( [key] )</h4>
+            <h4 class="text-muted"><i class="fa fa-minus"></i> .maxHeapify( [key] )</h4>
+            <h4 class="text-muted"><i class="fa fa-minus"></i> .getParent( [key] )</h4>            
+            <h4 class="text-muted"><i class="fa fa-minus"></i> .setParent( [key], [value] )</h4>
+            <h4 class="text-muted"><i class="fa fa-minus"></i> .getLeft( [key] )</h4>
+            <h4 class="text-muted"><i class="fa fa-minus"></i> .setLeft( [key], [value] )</h4>
+            <h4 class="text-muted"><i class="fa fa-minus"></i> .getRight( [key] )</h4>
+            <h4 class="text-muted"><i class="fa fa-minus"></i> .setRight( [key], [value] )</h4>
             
             <hr />
 

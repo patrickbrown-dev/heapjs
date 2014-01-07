@@ -78,15 +78,14 @@ var treeData = {
 		},
 		{
 			name: "label",
-			contents: [
-				{
-					name: "label",
-					contents: [
-					]
-				},
-				{
-					name: "label",
-					contents: [
+            contents: [
+                {
+                    name: "label",
+                    contents: []
+                },
+                {
+                    name: "label",
+                    contents: [
 					]
 				},
 			]
