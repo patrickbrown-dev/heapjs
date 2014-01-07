@@ -2,26 +2,35 @@
  * Tests
  */
 
-tests = function()
-{
-	var heap = new Heap;
+var heapjs = require("../heapjs/heap.js");
 
-	console.log(heap);
+testMaxHeap = function()
+{
+    var err = 0;
+	var h = new heapjs.maxHeap();
 
 	for(var i = 0; i < 100; i++){
-		heap.insert(Math.floor(Math.random()*100));
+		h.push(Math.floor(Math.random()*100));
 	}
 
 	var last = 100;
 	var temp;
 
 	for(var i = 0; i < 100; i++){
-		temp = heap.extractMax();
+		temp = h.pop();
 		if(temp > last){
-			console.log("ERROR");
+            err++;
 		}
 		last = temp;
-		console.log(last);
 	}
+    return err;
+}
+
+var err = testMaxHeap();
+
+if(err > 0){
+    throw new Error("assertion tests failed.");
+}else{
+    console.log("all tests passed.");
 }
 
