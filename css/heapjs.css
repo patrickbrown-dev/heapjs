@@ -1,9 +1,13 @@
-#heapshell {
-    margin-top:5px;
-}
+/**
+ * Base styles
+ */
 
 footer {
     padding-bottom: 50px;
+}
+
+pre {
+    margin:0px 0px 5px;
 }
 
 .input-group {
@@ -12,6 +16,10 @@ footer {
 
 .btn-code {
     font-family: Menlo, Consolas, Monaco, "Lucida Console", monospace;
+}
+
+#heapshell {
+    margin-top:5px;
 }
 
 /**
@@ -29,13 +37,17 @@ footer {
 }
 
 .node text {
-    font: 10px sans-serif;
+    font: 12px sans-serif;
 }
 
 .link {
     fill: none;
     stroke: #ccc;
     stroke-width: 1.5px;
+}
+
+.well {
+    margin: 0px;
 }
 
 
